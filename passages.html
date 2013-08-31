@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title>Verses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/passages.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Verses -->
+    <div class="container" id="versesContainer">
+      <div class="page-header">
+        <h1><span class="glyphicon glyphicon-book"></span>&nbsp;Passages</h1>
+      </div>
+      
+      <div ng-controller="VersesController">
+        <form class="form-inline" role="form" ng-submit="addVerse()">
+          <div class="form-group">
+            <input type="text" class="form-control" id="verseInput" placeholder="Enter a verse here..." ng-model="verseInput">
+          </div>
+          <div class="form-group">
+            <button type="submit" id="addButton" class="btn btn-primary">
+              <span class="glyphicon glyphicon-plus"></span>&nbsp;Add
+            </button>
+          </div>
+        </form>
+      
+        <br/>
+        
+        <table class="table table-hover">
+          <tr ng-repeat="verse in verses" id="verseRow">
+            <td>
+              {{verse.text}}
+            </td>
+            <td style="width: 20px;">
+              <span id="deleteButton" class="glyphicon glyphicon-trash" ng-click="deleteVerse(verse.id)"></span>
+            </td>
+          </tr>
+        </table>
+        <button type="button" class="btn btn-primary pull-right" ng-click="clearAllVerses()" ng-show="verses.length > 0">
+          <span class="glyphicon glyphicon-trash"></span>&nbsp;All
+        </button>
+        
+        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+          <button type="button" class="btn btn-danger navbar-btn pull-right" style="margin-right: 5px;" ng-click="createPresentation()" ng-show="verses.length > 0">
+            Create Presentation &nbsp; <span class="glyphicon glyphicon-facetime-video"></span>
+          </button>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- Presentation -->
+    <div class="container" id="presentationContainer">
+      <div class="page-header">
+        <h1 id="slideVerse"></h1>    
+      </div>
+      <div id="slide">
+        <blockquote>
+          <p style="font-size: 32px;" id="slidePassage"></p>
+          <!-- <small style="font-size: 18px;" id="slideVerse"></small> -->
+        </blockquote>  
+      </div>
+      <nav class="navbar navbar-default navbar-fixed-bottom" style="margin-left: 5px;" role="navigation">
+        <button class="btn btn-primary navbar-btn" id="previousVerseButton">
+          <span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Previous
+        </button>
+        <button class="btn btn-primary navbar-btn pull-right" style="margin-right: 5px;" id="nextVerseButton">
+          Next&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      </nav>      
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-2.0.3.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/passages.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+      });
+    </script>
+  </body>
+</html>
