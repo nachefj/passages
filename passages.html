@@ -17,7 +17,7 @@
     <!-- Verses -->
     <div class="container" id="versesContainer">
       <div class="page-header">
-        <h1><span class="glyphicon glyphicon-book"></span>&nbsp;Passages</h1>
+        <h1><span class="glyphicon glyphicon-book"></span>&nbsp;Passages&nbsp;<small style="font-size: 14px;">Visualize the Word!</small></h1>
       </div>
       
       <div ng-controller="VersesController">
@@ -50,7 +50,7 @@
 
         <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
           <button type="button" class="btn btn-danger navbar-btn pull-right" style="margin-right: 5px;" ng-click="createPresentation()" ng-show="verses.length > 0">
-            Create Presentation &nbsp; <span class="glyphicon glyphicon-facetime-video"></span>
+            Create Presentation &nbsp; <span class="glyphicon glyphicon-play"></span>
           </button>
         </nav>
       </div>
@@ -70,10 +70,13 @@
       <br/><br/>
       <nav class="navbar navbar-default navbar-fixed-bottom" style="margin-left: 5px;" role="navigation">
         <button class="btn btn-primary navbar-btn" id="previousVerseButton">
-          <span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Previous
+          <span class="glyphicon glyphicon-chevron-left"></span>&nbsp;<span id="previousVerseButtonText">Previous</span>
         </button>
         <button class="btn btn-primary navbar-btn pull-right" style="margin-right: 5px;" id="nextVerseButton">
-          Next&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
+          <span id="nextVerseButtonText">Next</span>&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+        <button class="btn btn-danger navbar-btn pull-right" style="margin-right: 5px; display: none;" id="finishPresentationButton">
+          Finish&nbsp;<span class="glyphicon glyphicon-stop"></span>
         </button>
       </nav>      
     </div>

@@ -45,15 +45,18 @@ function VersesController($scope) {
 
 function Presentation(verses) {
   var currentSlideIndex = -1;
+  $("#slidePassage").html("");
   $("#versesContainer").hide();
   $("#presentationContainer").show();
   $("#previousVerseButton").click(fetchPreviousVerse);
   $("#nextVerseButton").click(fetchNextVerse);
+  $("#finishPresentationButton").click(onFinishPresentationClick);
   
   fetchNextVerse();
   
   function fetchVerse() {
     var verse = verses[currentSlideIndex];
+    togglePreviousNextButtons();
     
     $.ajax(BIBLE_ORG_BASE_API_URL, {
       type: "get",
@@ -85,21 +88,23 @@ function Presentation(verses) {
   
   function togglePreviousNextButtons() {
     if (currentSlideIndex == 0) {
-      $("#previousVerseButton").attr("disabled", true);
+      $("#previousVerseButton").hide();
     } else {
-      $("#previousVerseButton").attr("disabled", false);
+      $("#previousVerseButtonText").text(verses[currentSlideIndex-1].text);
+      $("#previousVerseButton").show();
     }
     
     if (currentSlideIndex == verses.length-1) {
-      $("#nextVerseButton").attr("disabled", true);
+      $("#nextVerseButton").hide();
+      $("#finishPresentationButton").show();
     } else {
-      $("#nextVerseButton").attr("disabled", false);
+      $("#finishPresentationButton").hide();
+      $("#nextVerseButtonText").text(verses[currentSlideIndex+1].text);
+      $("#nextVerseButton").show();
     }
   }
 
   function onFetchVersesSuccess(data) {
-    togglePreviousNextButtons();
-    
     //build passage because each verse is returned as a JSON object
     var passage = "";
     $.each(data, function(index, value){
@@ -109,6 +114,9 @@ function Presentation(verses) {
     $("#slidePassage").html(passage);
   }
   
+  function onFinishPresentationClick() {
+    location.reload();
+  }
 }
 
 function saveVerses(verses) {
