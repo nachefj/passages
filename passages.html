@@ -33,7 +33,10 @@
         </form>
       
         <br/>
-        
+        <button type="button" class="btn btn-primary pull-right" ng-click="clearAllVerses()" ng-show="verses.length > 0">
+          <span class="glyphicon glyphicon-trash"></span>&nbsp;All
+        </button>
+        <br/><br/>
         <table class="table table-hover">
           <tr ng-repeat="verse in verses" id="verseRow">
             <td>
@@ -44,9 +47,6 @@
             </td>
           </tr>
         </table>
-        <button type="button" class="btn btn-primary pull-right" ng-click="clearAllVerses()" ng-show="verses.length > 0">
-          <span class="glyphicon glyphicon-trash"></span>&nbsp;All
-        </button>
         
         <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
           <button type="button" class="btn btn-danger navbar-btn pull-right" style="margin-right: 5px;" ng-click="createPresentation()" ng-show="verses.length > 0">
