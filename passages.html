@@ -37,7 +37,7 @@
           <span class="glyphicon glyphicon-trash"></span>&nbsp;All
         </button>
         <br/><br/>
-        <table class="table table-hover">
+        <table class="table table-hover" style="margin-bottom: 80px;">
           <tr ng-repeat="verse in verses" id="verseRow">
             <td>
               {{verse.text}}
@@ -47,7 +47,6 @@
             </td>
           </tr>
         </table>
-
         <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
           <button type="button" class="btn btn-danger navbar-btn pull-right" style="margin-right: 5px;" ng-click="createPresentation()" ng-show="verses.length > 0">
             Create Presentation &nbsp; <span class="glyphicon glyphicon-play"></span>
@@ -61,13 +60,13 @@
       <div class="page-header">
         <h1 id="slideVerse"></h1>    
       </div>
-      <div id="slide">
+      <div id="slide" style="margin-bottom: 80px;">
         <blockquote>
           <p style="font-size: 32px;" id="slidePassage"></p>
           <!-- <small style="font-size: 18px;" id="slideVerse"></small> -->
         </blockquote>
       </div>
-      <br/><br/>
+      
       <nav class="navbar navbar-default navbar-fixed-bottom" style="margin-left: 5px;" role="navigation">
         <button class="btn btn-primary navbar-btn" id="previousVerseButton">
           <span class="glyphicon glyphicon-chevron-left"></span>&nbsp;<span id="previousVerseButtonText">Previous</span>
