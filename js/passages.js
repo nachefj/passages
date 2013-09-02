@@ -1,4 +1,4 @@
-var COOKIE_NAME = "VERSES";
+var LOCALSTORE_KEY_NAME = "PASSAGES_APP";
 var BIBLE_ORG_BASE_API_URL = "http://labs.bible.org/api/";
 
 function VersesController($scope) {
@@ -6,6 +6,7 @@ function VersesController($scope) {
   $scope.verseNextId = $scope.verses.length;
   $("#verseInput").focus();
   $("#presentationContainer").hide();
+  var selectedVerseRow;
 
   $scope.addVerse = function() {
     if ($scope.verseInput) {
@@ -35,7 +36,28 @@ function VersesController($scope) {
     });
     saveVerses($scope.verses);
     $("#verseInput").val("");
-    $("#verseInput").focus();
+  }
+  
+  $scope.selectVerseRow = function(id) {
+    if (selectedVerseRow) {
+      selectedVerseRow.removeClass("warning");
+      selectedVerseRow.find("#moveButtons").hide();
+    }
+    
+    var verseRow = $("#verseRow"+id);
+    
+    verseRow.addClass("warning");
+    verseRow.find("#moveButtons").show();
+    
+    selectedVerseRow = verseRow;
+  }
+  
+  $scope.moveVerseUp = function(id) {
+    
+  }
+  
+  $scope.moveVerseDown = function(id) {
+    
   }
   
   $scope.createPresentation = function() {
@@ -120,11 +142,11 @@ function Presentation(verses) {
 }
 
 function saveVerses(verses) {
-  localStorage.setItem(COOKIE_NAME, JSON.stringify(verses));
+  localStorage.setItem(LOCALSTORE_KEY_NAME, JSON.stringify(verses));
 }
   
 function getSavedVerses() {
-  var parsedVerses = JSON.parse(localStorage.getItem(COOKIE_NAME));
+  var parsedVerses = JSON.parse(localStorage.getItem(LOCALSTORE_KEY_NAME));
     
   if (parsedVerses) { 
     return parsedVerses;

@@ -15,44 +15,47 @@
   </head>
   <body>
     <!-- Verses -->
-    <div class="container" id="versesContainer">
+    <div class="container" id="versesContainer" ng-controller="VersesController">
       <div class="page-header">
-        <h1><span class="glyphicon glyphicon-book"></span>&nbsp;Passages&nbsp;<small style="font-size: 14px;">Visualize the Word!</small></h1>
+        <h1><span class="glyphicon glyphicon-book"></span>&nbsp;Passages</h1>
       </div>
       
-      <div ng-controller="VersesController">
-        <form class="form-inline" role="form" ng-submit="addVerse()">
-          <div class="form-group">
-            <input type="text" class="form-control" id="verseInput" placeholder="Enter a verse here..." ng-model="verseInput">
-          </div>
-          <div class="form-group">
-            <button type="submit" id="addButton" class="btn btn-primary">
-              <span class="glyphicon glyphicon-plus"></span>&nbsp;Add
-            </button>
-          </div>
-        </form>
-      
-        <br/>
-        <button type="button" class="btn btn-primary pull-right" ng-click="clearAllVerses()" ng-show="verses.length > 0">
-          <span class="glyphicon glyphicon-trash"></span>&nbsp;All
-        </button>
-        <br/><br/>
-        <table class="table table-hover" style="margin-bottom: 80px;">
-          <tr ng-repeat="verse in verses" id="verseRow">
-            <td>
-              {{verse.text}}
-            </td>
-            <td style="width: 20px;">
-              <span id="deleteButton" class="glyphicon glyphicon-trash" ng-click="deleteVerse(verse.id)"></span>
-            </td>
-          </tr>
-        </table>
-        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-          <button type="button" class="btn btn-danger navbar-btn pull-right" style="margin-right: 5px;" ng-click="createPresentation()" ng-show="verses.length > 0">
-            Create Presentation &nbsp; <span class="glyphicon glyphicon-play"></span>
+      <form class="form-inline" style="margin-bottom: 30px;" role="form" ng-submit="addVerse()">
+        <div class="form-group">
+          <input type="text" class="form-control" id="verseInput" placeholder="Enter a verse here..." ng-model="verseInput">
+        </div>
+        <div class="form-group">
+          <button type="submit" id="addButton" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span>
           </button>
-        </nav>
-      </div>
+        </div>
+      </form>
+    
+      <button type="button" class="btn btn-primary pull-right" style="margin-bottom: 10px;" ng-click="clearAllVerses()" ng-show="verses.length > 0">
+        <span class="glyphicon glyphicon-trash"></span>&nbsp;All
+      </button>
+      <table class="table table-hover" style="margin-bottom: 80px;">
+        <tr ng-repeat="verse in verses" id="verseRow{{verse.id}}" ng-click="selectVerseRow(verse.id)">
+          <td style="width: 50px;">
+            <span id="moveButtons" style="display: none;">
+              <span class="glyphicon glyphicon-arrow-up" ng-click="moveVerseUp(verse.id)"></span>
+              <span class="glyphicon glyphicon-arrow-down" ng-click="moveVerseDown(verse.id)"></span>
+            </span>
+          </td>
+          <td>
+            {{verse.text}}
+          </td>
+          <td style="width: 20px;">
+            <span id="deleteButton" class="glyphicon glyphicon-trash" ng-click="deleteVerse(verse.id)"></span>
+          </td>
+        </tr>
+      </table>
+      
+      <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <button type="button" class="btn btn-success navbar-btn pull-right" style="margin-right: 5px;" ng-click="createPresentation()" ng-show="verses.length > 0">
+          Create Presentation &nbsp; <span class="glyphicon glyphicon-play"></span>
+        </button>
+      </nav>
     </div>
     
     <!-- Presentation -->
@@ -60,10 +63,10 @@
       <div class="page-header">
         <h1 id="slideVerse"></h1>    
       </div>
+      
       <div id="slide" style="margin-bottom: 80px;">
         <blockquote>
-          <p style="font-size: 32px;" id="slidePassage"></p>
-          <!-- <small style="font-size: 18px;" id="slideVerse"></small> -->
+          <p style="font-size: 30px;" id="slidePassage"></p>
         </blockquote>
       </div>
       
@@ -81,7 +84,7 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-2.0.3.js"></script>
+    <script src="js/jquery-2.0.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
