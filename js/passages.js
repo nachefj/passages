@@ -40,7 +40,8 @@ function VersesController($scope) {
   $scope.selectVerseRow = function(id) {
     if (selectedVerseRow) {
       selectedVerseRow.removeClass("warning");
-      selectedVerseRow.find("#moveButtons").hide();
+      selectedVerseRow.find("#moveButtonUp").hide();
+      selectedVerseRow.find("#moveButtonDown").hide();
       selectedVerseRow.find("#orderNumber").show();
     }
     
@@ -48,7 +49,8 @@ function VersesController($scope) {
     
     verseRow.addClass("warning");
     verseRow.find("#orderNumber").hide();
-    verseRow.find("#moveButtons").show();
+    verseRow.find("#moveButtonUp").show();
+    verseRow.find("#moveButtonDown").show();
     
     selectedVerseRow = verseRow;
   }
