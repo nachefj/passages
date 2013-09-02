@@ -34,12 +34,15 @@
       <button type="button" class="btn btn-primary pull-right" style="margin-bottom: 10px;" ng-click="clearAllVerses()" ng-show="verses.length > 0">
         <span class="glyphicon glyphicon-trash"></span>&nbsp;All
       </button>
-      <table class="table table-hover" style="margin-bottom: 80px;">
+      <table class="table table-hover" style="margin-bottom: 80px; font-size: 24px;">
         <tr ng-repeat="verse in verses" id="verseRow{{verse.id}}" ng-click="selectVerseRow(verse.id)">
-          <td style="width: 50px;">
+          <td style="width: 80px;">
             <span id="moveButtons" style="display: none;">
               <span class="glyphicon glyphicon-arrow-up" ng-click="moveVerseUp(verse.id)"></span>
               <span class="glyphicon glyphicon-arrow-down" ng-click="moveVerseDown(verse.id)"></span>
+            </span>
+            <span id="orderNumber" style="font-weight: bold;">
+              {{verse.id}}.
             </span>
           </td>
           <td>
