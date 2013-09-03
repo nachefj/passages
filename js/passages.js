@@ -5,7 +5,6 @@ var BIBLE_ORG_BASE_API_URL = "http://labs.bible.org/api/";
 function VersesController($scope) {
   $scope.verses = getSavedVerses();
   $("#verseInput").focus();
-  $("#presentationContainer").hide();
   var selectedVerseRow;
 
   $scope.addVerse = function() {
@@ -37,7 +36,7 @@ function VersesController($scope) {
     $("#verseInput").val("");
   }
   
-  $scope.selectVerseRow = function(id) {
+  $scope.selectVerseRow = function(id, index) {
     if (selectedVerseRow) {
       selectedVerseRow.removeClass("warning");
       selectedVerseRow.find("#moveButtonUp").hide();
@@ -49,18 +48,31 @@ function VersesController($scope) {
     
     verseRow.addClass("warning");
     verseRow.find("#orderNumber").hide();
-    verseRow.find("#moveButtonUp").show();
-    verseRow.find("#moveButtonDown").show();
+    
+    if (index != 0) {
+      verseRow.find("#moveButtonUp").show();
+    }
+    
+    if (index != $scope.verses.length-1) {
+      verseRow.find("#moveButtonDown").show();
+    }
     
     selectedVerseRow = verseRow;
   }
   
-  $scope.moveVerseUp = function(id) {
-    
+  $scope.moveVerseUp = function(index) {
+    swapVerses(index, index-1);
   }
   
-  $scope.moveVerseDown = function(id) {
-    
+  $scope.moveVerseDown = function(index) {
+    swapVerses(index, index+1);
+  }
+  
+  swapVerses = function(fromIndex, toIndex) {
+    var backupVerse = $scope.verses[toIndex];
+    $scope.verses[toIndex] = $scope.verses[fromIndex];
+    $scope.verses[fromIndex] = backupVerse;
+    saveVerses($scope.verses);
   }
   
   $scope.createPresentation = function() {

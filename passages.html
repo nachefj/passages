@@ -35,16 +35,16 @@
         <span class="glyphicon glyphicon-trash"></span>&nbsp;All
       </button>
       <table class="table table-hover" style="margin-bottom: 80px; font-size: 24px;">
-        <tr ng-repeat="verse in verses" id="verseRow{{verse.id}}" style="height: 50px; vertical-align: middle;" ng-click="selectVerseRow(verse.id)">
+        <tr ng-repeat="verse in verses" id="verseRow{{verse.id}}" style="height: 50px; vertical-align: middle;" ng-click="selectVerseRow(verse.id, $index)">
           <td style="width: 100px;">
-            <button type="button" id="moveButtonUp" class="btn btn-primary btn-sm" style="display: none;" ng-click="moveVerseUp(verse.id)">
+            <button type="button" id="moveButtonUp" class="btn btn-primary btn-sm" style="display: none;" ng-click="moveVerseUp($index)">
               <span class="glyphicon glyphicon-arrow-up"></span>
             </button>
-            <button type="button" id="moveButtonDown" class="btn btn-primary btn-sm" style="display: none;" ng-click="moveVerseDown(verse.id)">
+            <button type="button" id="moveButtonDown" class="btn btn-primary btn-sm" style="display: none;" ng-click="moveVerseDown($index)">
               <span class="glyphicon glyphicon-arrow-down"></span>
             </button>
             <span id="orderNumber" style="font-weight: bold;">
-              {{verse.id}}.
+              {{$index+1}}.
             </span>
           </td>
           <td>
